@@ -33,3 +33,14 @@ Then, repeat step 1.
   - Better mappings in vim for some of the longer commands
   - A script for properly handling input piped into Python, so that it is easier to integrate with Vim
 
+### Improved Python for vim
+
+```bash
+#!/usr/bin/bash
+# A script for simplifying calling python within vim scripts
+cat <( while read line; do
+    echo "${line}"
+done
+)  | python3 -i 2>/dev/null
+```
+
