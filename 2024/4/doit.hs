@@ -1,5 +1,22 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Use camelCase" #-}
+
+-- This program finds counds the occurences of the word "MAS" Written in an
+-- X-shape in a 2D list of characters, regardless of their ordering
+--
+-- i.e., if we assume "." are irrelevant characters
+--
+--     M.M
+--     .A.
+--     S.S
+--
+-- or
+--     S.S
+--     .A.
+--     M.M
+
+
+
 import Control.Applicative
 -- Import the file containing the proper problem input
 import Basis
