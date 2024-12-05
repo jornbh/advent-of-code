@@ -1,90 +1,82 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Use camelCase" #-}
 import Control.Applicative
--- import qualified Data.Vector as V
+-- Import the file containing the proper problem input
 import Basis
 
-
-diff_foos_bases :: [Int -> Int]
-
-
-diff_foos_bases = [(+0), (+1) , (+ negate 1) ]
-
-diff_foos :: [(Int -> Int, Int -> Int)]
-diff_foos = (,) <$> diff_foos_bases <*> diff_foos_bases
-
-apply_diff_foo_succ :: (a -> a, b -> b) -> (a, b) -> [(a, b)]
-apply_diff_foo_succ (fa , fb ) (a,b) = (a,b):apply_diff_foo_succ  (fa, fb) (fa a, fb b)
-
-start_point_to_lines :: (Int, Int) -> [[(Int, Int)]]
-start_point_to_lines  start_point = map (($ start_point) . apply_diff_foo_succ) diff_foos
-
-
---input_matrix :: [[Char]]
---input_matrix = [ "XMAS" ,         [ 'X', 'M', 'A', 'S' ]     ]
-
-m2 foo = map (map foo)
-f2 foo = map (filter foo)
-
-
+-- Test if any point of the line is outside of the input matrix
 is_line_outside input_matrix_arg line = let
-
         xmax = length input_matrix_arg -1
         ymax = length (head input_matrix_arg) -1
 
         xes = map fst line
         ys = map snd line
 
-        is_outside = or [any (<0) xes ,         any (>xmax) xes ,         any (<0) ys,         any (>ymax) ys        ]
+        -- All border tests on the x-es and the ys
+        any_x_outside = or  $ [(<0) , (>xmax) ] <*> xes
+        any_y_outside = or  $ [(<0) , (>ymax) ] <*> ys
 
+        is_outside = any_x_outside || any_y_outside
     in is_outside
 
-line_to_chars :: [[Char]] -> [(Int, Int)]  -> [Char]
-line_to_chars input_matrix_arg line = let
-        is_outside = is_line_outside input_matrix_arg line
-        output False  = line_to_chars_inner input_matrix_arg line
-        output _  = []
-    in output is_outside
-    -- in output
 
-get_cross_from_start :: (Int, Int) -> [([(Int, Int)], [(Int, Int)])]
-get_cross_from_start start = let
+-- Get all combinations of how to draw a diagonal cross over a start-pont.
+--
+-- i.e
+-- 0,1,2 and 2,1,0
+-- or
+-- 0,1,2 and 0,1,2
+get_crosses_from_start_point :: (Int, Int) -> [([(Int, Int)], [(Int, Int)])]
+get_crosses_from_start_point start = let
+    add_tuple_elements (a,b) (c,d) = ((a+c), (b+d) )
+    add_to_start_point = add_tuple_elements  start
 
-    add_tuples (a,b) (c,d) = ((a+c), (b+d) )
-
+    -- Create the two basic lines out from the start-point
     down_cross_diffs = [(negate 1,1 ) , (0,0) , (1, negate 1) ]
     up_cross_diffs = [(negate 1, negate 1 ) , (0,0) , (1,1) ]
+    up_cross = map add_to_start_point  up_cross_diffs
+    down_cross = map add_to_start_point  down_cross_diffs
 
-    up_cross = map (add_tuples start)  up_cross_diffs
-    down_cross = map (add_tuples start)  down_cross_diffs
-
-
+    -- Get all variations of either reversing or not reversing the lines
     variants = [reverse, id]
-
-    outputs = do
+    list_of_line_pairs = do
         op1 <- variants
         op2 <- variants
         return (op1 down_cross, op2 up_cross)
 
-    in outputs
+    in list_of_line_pairs
 
+-- Will ignore indecies that are outside of the matrix
+line_to_chars :: [[Char]] -> [(Int, Int)]  -> [Char]
+line_to_chars input_matrix_arg line = let
+        is_outside = is_line_outside input_matrix_arg line
+        -- No output if the line is outside of the character matrix
+        output False  = line_to_chars_inner input_matrix_arg line
+        output _  = []
+    in output is_outside
 
+-- No bundary checking
 line_to_chars_inner :: [[Char]] -> [(Int, Int)] -> [Char]
 line_to_chars_inner input_matrix_arg line = do
-
     point  <- line
-
     let (x,y) = point
-
+    -- NOTE: This is extremely slow, due to Haskell's indexing. Consider using
+    -- the Vector package to get O(1) indexing instead of O(n)
     let char = (input_matrix_arg !! x ) !! y
-    -- let char ='X'
     return char
 
 
-evaluate_cross :: p -> [([(Int, Int)], [(Int, Int)])] -> Bool
-evaluate_cross input_matrix_arg cross = let
-    cross_to_chars (l1,l2) =  (line_to_chars input_matrix l1, line_to_chars input_matrix l2)
-    cross_chars = map cross_to_chars cross
+-- Test if a any of all the possible versions of a cross contains the words MAS and MAS
+-- Both lines in the cross contain a direction, so it will
+-- evaluate false if it is given SAM instead of MAS
+--
+-- This is not optimized for exiting early if one of the lines is not MAS or SAM
+-- The entire structure could also have been changed to only look at each direction once per edge
+evaluate_crosses :: p -> [([(Int, Int)], [(Int, Int)])] -> Bool
+evaluate_crosses input_matrix_arg crosses = let
+    line_to_chars_partial =  line_to_chars input_matrix
+    cross_to_chars (l1,l2) =  (line_to_chars_partial l1, line_to_chars_partial l2)
+    cross_chars = map cross_to_chars crosses
     is_mas = any ( == ("MAS", "MAS")) cross_chars
     in is_mas
 
@@ -92,38 +84,24 @@ evaluate_cross input_matrix_arg cross = let
 
 
 main = do
-    let start = (0,0)  :: (Int, Int)
+    -- Generate all the different possible start-points
     let basis_x = [0..(length input_matrix) ]
     let basis_y = [0..(length $ head input_matrix) ]
+
+    -- This is just a cartesian product
+    -- If the solution had been too slow, this could have been optimized by:
+    -- - Filtering out any start-point that does not match an "A"
+    -- - Not evaluatign along the borders, since we know how big the corss is
     let start_points = (,) <$> basis_x <*> basis_y
-    let lines_inf = concatMap start_point_to_lines start_points
-    let lines = map (take 4) $ filter (\(f:s:tl) -> f/=s  ) lines_inf
-    let dummy_line =   lines  !! 0
-    let dummy_chars = line_to_chars_inner input_matrix (dummy_line )
-
-    let char_lists_unfiltered = map (line_to_chars input_matrix) lines
-    let char_lists = filter (=="XMAS") char_lists_unfiltered
-    -- let char_lists =  char_lists_unfiltered
-    print "Indices"
-    print dummy_line
-    print $ take 50 $ map (take 5)   lines
-    print "DUMMY CHARS"
-    print dummy_chars
-    print "CHARS"
-    print $ length  char_lists
-    print $ "Cross from start"
-
-    -- let list_of_crosses = 
 
 
-    let evaluate = evaluate_cross input_matrix .  get_cross_from_start
+    -- Combine making a cross with evaluating if it contains "MAS" and "MAS"
+    let evaluate = evaluate_crosses input_matrix .  get_crosses_from_start_point
+    let evaluations = filter evaluate start_points
 
-    let cross = get_cross_from_start (1,1)  :: [([(Int, Int)], [(Int,Int)])]
-                                            -- ([(Int, Int)], [(Int, Int)])
+    -- Only pass the valid start points
+    let valid_crosses = evaluations
 
-
-    let evaluations = map evaluate start_points
-
-    -- let eval = evaluate_cross input_matrix cross
-
-    print $ length $ filter id  evaluations
+    print  "N crosses with MAS and MAS in them"
+    -- Count the number of valid crosses
+    print $ length valid_crosses
