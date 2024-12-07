@@ -14,6 +14,7 @@ for line in lines:
         new_subtots_mat = [ [
             subtot + new_param,
             subtot * new_param,
+            int(str(subtot) + str(new_param))
             ] for subtot in subtots ]
         subtots = { el for li in new_subtots_mat for el in li }
     if ans in subtots:
