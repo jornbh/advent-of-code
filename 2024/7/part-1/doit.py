@@ -18,7 +18,7 @@ for line in lines:
             ] for subtot in subtots ]
         subtots = { el for li in new_subtots_mat for el in li }
     if ans in subtots:
-        print("yes", line)
+#        print("yes", line)
         total +=ans
     else:
         print("NO", line)
