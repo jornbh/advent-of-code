@@ -1,0 +1,563 @@
+program_line =  Program: 2,4,1,2,7,5,4,7,1,3,5,5,0,3,3,0
+program_string =  2,4,1,2,7,5,4,7,1,3,5,5,0,3,3,0
+program =  [2, 4, 1, 2, 7, 5, 4, 7, 1, 3, 5, 5, 0, 3, 3, 0]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
+i =  0
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o0 [1]
+i =  1
+outputs* =  [0]
+ev [] [0]
+ev =  False
+outputs =  0o1 [0]
+i =  2
+outputs* =  [1]
+ev [] [1]
+ev =  False
+outputs =  0o2 [1]
+i =  3
+outputs* =  [3]
+ev [] [3]
+ev =  False
+outputs =  0o3 [3]
+i =  4
+outputs* =  [5]
+ev [] [5]
+ev =  False
+outputs =  0o4 [5]
+i =  5
+outputs* =  [4]
+ev [] [4]
+ev =  False
+outputs =  0o5 [4]
+i =  6
+outputs* =  [7]
+ev [] [7]
+ev =  False
+outputs =  0o6 [7]
