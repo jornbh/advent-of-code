@@ -13,6 +13,9 @@
 # side-definition-start-searching-from-line:10
 #  </jorn-config>
 
+import functools
+
+
 def info(*args, **kwargs):
     return
     print(*args, **kwargs)
@@ -25,7 +28,6 @@ def get_joltages():
     return li
 
 BATERIES = []
-import functools
 @functools.cache
 def get_max_joltage(bat_no, start_ind , capacity=2):
     # print(f"bat_no, start_ind , capacity:  {bat_no, start_ind , capacity} vimtag96861932310187" ) #fmt: skip
@@ -46,7 +48,6 @@ def get_max_joltage(bat_no, start_ind , capacity=2):
         if ind+1 == len(batery):
             break
         new_ind = ind + start_ind + 1
-        sliced = batery[ind+1:]
         tail_result = get_max_joltage(bat_no, new_ind , capacity=capacity -1 )
         candiate_str = str(head) + str(tail_result)
         candidate_strings.append(candiate_str )
@@ -60,14 +61,11 @@ def get_max_joltage(bat_no, start_ind , capacity=2):
 
 bats = get_joltages()
 BATERIES = bats
-# info(f"bats:  {bats} vimtag1746148140331" ) #fmt: skip
-# info(f"cand:  {cand} vimtag16812762234336" ) #fmt: skip
 joltages = []
 for ind in range(len(bats)):
-    joltage = get_max_joltage(ind, 0, capacity=)
+    joltage = get_max_joltage(ind, 0, capacity=12)
     joltages.append(joltage)
     print(f"joltage:  {joltage} vimtag84823010777984" ) #fmt: skip
 info(f"joltages:  {joltages} vimtag37755537611186" ) #fmt: skip
 tot = sum(joltages)
 print(f"tot:  {tot} vimtag11649918082019" ) #fmt: skip
-# info(f"bats:  {bats} vimtag22460262569841" ) #fmt: skip
