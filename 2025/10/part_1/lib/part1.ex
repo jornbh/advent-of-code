@@ -196,7 +196,6 @@ defmodule Part1 do
       for problem <- contents do
         bfs_candidates(problem.fuse_box, problem.connections)
       end
-
     dbg()
     # final_node, connections
 
