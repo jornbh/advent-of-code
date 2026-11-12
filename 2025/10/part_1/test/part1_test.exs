@@ -5,17 +5,9 @@ defmodule Part1Test do
   test "Parses input" do
     file_name = "resources/short.txt"
     # contents = Part1.parse_input("resources/part_1_input.txt")
-    contents = Part1.parse_input("resources/short.txt")
-    dbg()
-
-    # contents = problems |> Enum.map(&Part1.from_input_line_to_dict/1)
-
-
+    contents = Part1.parse_input(file_name)
 
     depths = contents |> Enum.map(&Part1.bfs_candidates(&1.fuse_box, &1.connections))
-
-    # contents = problems |> Enum.map(&Part1.from_input_line_to_dict/1)
-    dbg(depths)
-
+    assert depths == [2, 3, 2]
   end
 end

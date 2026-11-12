@@ -147,7 +147,7 @@ defmodule Part1 do
     |> dbg()
 
     if Enum.any?(updated_candidates, &(&1 == fuse_box)) do
-      depth
+      depth + 1
     else
       bfs_candidates_inner(fuse_box, connections, updated_candidates, depth + 1)
     end
