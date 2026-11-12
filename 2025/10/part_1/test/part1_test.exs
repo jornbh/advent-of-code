@@ -4,14 +4,18 @@ defmodule Part1Test do
 
   test "Parses input" do
     file_name = "resources/short.txt"
-    contents = Part1.parse_input("resources/part_1_input.txt")
-
+    # contents = Part1.parse_input("resources/part_1_input.txt")
+    contents = Part1.parse_input("resources/short.txt")
     dbg()
 
-    depths =
-      for problem <- contents do
-        Part1.bfs_candidates(problem.fuse_box, problem.connections)
-      end
-      dbg()
+    # contents = problems |> Enum.map(&Part1.from_input_line_to_dict/1)
+
+
+
+    depths = contents |> Enum.map(&Part1.bfs_candidates(&1.fuse_box, &1.connections))
+
+    # contents = problems |> Enum.map(&Part1.from_input_line_to_dict/1)
+    dbg(depths)
+
   end
 end

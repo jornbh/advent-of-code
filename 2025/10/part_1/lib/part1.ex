@@ -1,4 +1,6 @@
 defmodule Part1 do
+  import Bitwise
+
   @moduledoc """
   --- Day 10: Factory ---
   Just across the hall, you find a large factory. Fortunately, the Elves here have plenty of time to decorate. Unfortunately, it's because the factory machines are all offline, and none of the Elves can figure out the initialization procedure.
@@ -72,7 +74,7 @@ defmodule Part1 do
     # |> dbg()
   end
 
-  @spec from_input_line_to_dict(any()) :: %{connections: [bitstring()], fuse_box: bitstring()}
+  @spec from_input_line_to_dict(String.t()) :: %{connections: [integer()], fuse_box: integer()}
   def from_input_line_to_dict(input_line) do
     parts =
       input_line
@@ -86,50 +88,34 @@ defmodule Part1 do
       parts
       |> Enum.take(Enum.count(parts) - 1)
 
-    fuse_box_str
-    |> String.trim(" ")
-    |> String.trim("[")
-    |> String.trim("]")
-    |> String.split(",")
-    |> Enum.map(&(&1 == "#"))
+    fuse_box =
+      fuse_box_str
+      |> String.trim(" ")
+      |> String.trim("[")
+      |> String.trim("]")
+      # The symbols here have the LSB first, which can be confusing
+      |> String.reverse()
+      |> String.replace("#", "1")
+      |> String.replace(".", "0")
+      |> String.to_integer(2)
 
     connections =
       connections_strings
       |> Enum.map(fn connection_string ->
-        connection_string
-        |> String.trim("(")
-        |> String.trim(")")
-        |> String.split(",")
-        |> Enum.map(&String.to_integer(&1))
+        connection_positions =
+          connection_string
+          |> String.trim("(")
+          |> String.trim(")")
+          |> String.split(",")
+          |> Enum.map(&String.to_integer(&1))
+
+        connection_number = connection_positions |> Enum.map(&(1 <<< &1)) |> Enum.sum()
+        connection_number
       end)
 
-    fuse_box_list =
-      fuse_box_str
-      |> String.to_charlist()
-      |> Enum.map(&(&1 == ?#))
-      # Convert to ints
-      |> Enum.map(&if &1, do: 1, else: 0)
-
-    # Reversing will make this into a big endian list
-    fuse_box_raw = for el <- Enum.reverse(fuse_box_list), into: <<>>, do: <<el::1>>
-
     # n_bits = Enum.count(for <<_bit::1 <- fuse_box_raw>>, into: [], do: [])
-    n_bits = bit_size(fuse_box_raw) 
 
-    remaining_bits = 64 - n_bits
-    # fuse_box_padded = <<0::size(remaining_bits), fuse_box_raw::size(n_bits)>>
-    rhs = fuse_box_raw
-    lhs = <<0::size(remaining_bits)>>
-    fuse_box_padded = <<rhs::bitstring, lhs::bitstring>>
-    # fuse_box = fuse_box_raw
-    fuse_box = fuse_box_padded
-    n_bits_to_match = bit_size(fuse_box) 
-    dbg()
-
-    list_of_connection_masks =
-      connections |> Enum.map(&connection_mask_list_to_bit_mask(&1, n_bits_to_match))
-
-    %{fuse_box: fuse_box, connections: list_of_connection_masks}
+    %{fuse_box: fuse_box, connections: connections}
   end
 
   def bfs_candidates(fuse_box, connections) do
@@ -145,14 +131,17 @@ defmodule Part1 do
   end
 
   def bfs_candidates_inner(fuse_box, connections, candidates, depth) do
-    dbg()
+    dbg(connections)
+    dbg(candidates)
+
     combinations = for el1 <- connections, el2 <- candidates, into: [], do: {el1, el2}
 
     updated_candidates =
       combinations
       |> dbg()
-      |> Enum.map(fn {el1, el2} -> :crypto.exor(el1, el2) end)
+      |> Enum.map(fn {el1, el2} -> bxor(el1, el2) end)
       |> Enum.into(MapSet.new())
+      |> dbg()
 
     {fuse_box, depth}
     |> dbg()
@@ -162,40 +151,13 @@ defmodule Part1 do
     else
       bfs_candidates_inner(fuse_box, connections, updated_candidates, depth + 1)
     end
-
-    Enum.flat_map(candidates, & &1)
-  end
-
-  @spec connection_mask_list_to_bit_mask(any(), integer()) :: bitstring()
-  def connection_mask_list_to_bit_mask(connection_masks_list, n_bits) do
-    position_to_bit = fn el ->
-      bit =
-        if Enum.any?(connection_masks_list, &(el == &1)) do
-          1
-        else
-          0
-        end
-
-      <<bit::1>>
-    end
-
-    connections_mask_list = Enum.map(0..(n_bits-1), position_to_bit)
-    # Is this now little endian? 
-    # TOOD:  I need to look at how this fits with the other number!
-    # 0,1,2,3,4,5, etc
-    for el <- connections_mask_list, into: <<>>, do: el
   end
 
   def part_1() do
-    problems = parse_input("resources/part_1_input.txt")
-
-    contents = problems |> Enum.map(&from_input_line_to_dict/1)
+    contents = parse_input("resources/part_1_input.txt")
     dbg()
+    depths = contents |> Enum.map(&bfs_candidates(&1.fuse_box, &1.connections))
 
-    depths =
-      for problem <- contents do
-        bfs_candidates(problem.fuse_box, problem.connections)
-      end
     dbg()
     # final_node, connections
 
